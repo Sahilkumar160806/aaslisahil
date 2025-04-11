@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Batches - AasliSahil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #6a00f4;
+            --secondary-color: #ff6b00;
+            --dark-color: #1e1e1e;
+            --light-color: #f8f9fa;
+            --gray-color: #6c757d;
+        }
+        
+        body {
+            background-color: #ffffff;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+            border: 2px solid var(--secondary-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: transparent;
+            color: var(--secondary-color);
+        }
+        
+        .text-primary {
+            color: var(--primary-color);
+        }
+        
+        .text-secondary {
+            color: var(--secondary-color);
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray-color);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 25px;
+        }
+        
+        .nav-links a {
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .batch-hero {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+        
+        .batch-hero-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .batch-hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray-color);
+            margin-bottom: 2rem;
+        }
+        
+        /* Batch Categories */
+        .batch-categories {
+            padding: 50px 0;
+            background-color: white;
+        }
+        
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .category-tab {
+            padding: 10px 25px;
+            margin: 0 10px;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .category-tab.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .category-tab:hover:not(.active) {
+            color: var(--primary-color);
+        }
+        
+        /* Batches Grid */
+        .batches {
+            padding: 50px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .batches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .batch-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .batch-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .batch-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .batch-content {
+            padding: 25px;
+        }
+        
+        .batch-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: var(--light-color);
+            color: var(--primary-color);
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .batch-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .batch-description {
+            color: var(--gray-color);
+            margin-bottom: 20px;
+        }
+        
+        .batch-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .batch-meta-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .batch-meta-item i {
+            margin-right: 5px;
+            color: var(--primary-color);
+        }
+        
+        .batch-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .batch-price span {
+            font-size: 0.9rem;
+            font-weight: normal;
+            color: var(--gray-color);
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+        
+        .batch-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        /* Upcoming Batches */
+        .upcoming-batches {
+            padding: 50px 0;
+            background-color: white;
+        }
+        
+        .upcoming-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .upcoming-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .upcoming-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .upcoming-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .upcoming-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .upcoming-description {
+            color: var(--gray-color);
+            margin-bottom: 20px;
+        }
+        
+        /* CTA Section */
+        .batch-cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #8a2be2 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .batch-cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .batch-cta-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #b3b3b3;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b3b3b3;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .batch-hero-title {
+                font-size: 2.3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .category-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .category-tab {
+                margin: 5px 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .batch-hero-title {
+                font-size: 2rem;
+            }
+            
+            .batches-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .batch-cta-title {
+                font-size: 2rem;
+            }
+            
+            .batch-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .batch-actions .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">Aasli<span>Sahil</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="Batches.html">Batches</a></li>
+                    <li><a href="Library/Digital Library.html">Digital Library</a></li>
+                    <li><a href="Mock Test/Mock Tests.html">Mock Test & DPP</a></li>
+                    <li><a href="Contact.html">Contact</a></li>
+                </ul>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="batch-hero">
+        <div class="container">
+            <h1 class="batch-hero-title">Explore Our <span class="text-primary">Learning Batches</span></h1>
+            <p class="batch-hero-subtitle">Join our specialized batches designed to help you master concepts and excel in your exams</p>
+        </div>
+    </section>
+
+    <!-- Batch Categories -->
+    <section class="batch-categories">
+        <div class="container">
+            <div class="category-tabs">
+                <div class="category-tab active">All Batches</div>
+                <div class="category-tab">Chemistry</div>
+                <div class="category-tab">Physics</div>
+                <div class="category-tab">Mathematics</div>
+                <div class="category-tab">Free Courses</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Batches -->
+    <section class="batches">
+        <div class="container">
+            <h2 class="section-title">Our <span class="text-primary">Running Batches</span></h2>
+            <p class="section-subtitle">Join these batches now and start your learning journey with AasliSahil</p>
+            
+            <div class="batches-grid">
+                <!-- TOF 2025 Batch -->
+                <div class="batch-card">
+                    <img src="D:\cs\Website\educational website\images\Batch covers\tof batch 2025 cover.jpg" alt="TOF 2025 Batch" class="batch-image">
+                    <div class="batch-content">
+                        <span class="batch-badge">Chemistry</span>
+                        <h3 class="batch-title">TOF: Trick Of Fear 2025</h3>
+                        <p class="batch-description">Master Organic Chemistry with unique tricks and memory techniques. All reactions covered with fun learning approach.</p>
+                        
+                        <div class="batch-meta">
+                            <div class="batch-meta-item">
+                                <i class="fas fa-user-graduate"></i> 350+ Students
+                            </div>
+                            <div class="batch-meta-item">
+                                <i class="fas fa-star"></i> 4.5/5.0
+                            </div>
+                        </div>
+                        
+                        <div class="batch-price">
+                            FREE <span>₹1999</span>
+                        </div>
+                        
+                        <div class="batch-actions">
+                            <a href="Batches/TOF 2025/tof 2025.html" class="btn btn-primary">View Details</a>
+                            <a href="#" class="btn btn-secondary">Join Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Batch 02 -->
+                <div class="batch-card">
+                    <img src="D:\cs\Website\educational website\images\Batch covers\coming soon... for batches.jpg" alt="Physical Chemistry Batch" class="batch-image">
+                    <div class="batch-content">
+                        <span class="batch-badge">Chemistry</span>
+                        <h3 class="batch-title">Physical Chemistry Mastery</h3>
+                        <p class="batch-description">Comprehensive coverage of Physical Chemistry concepts with numerical problem solving techniques.</p>
+                        
+                        <div class="batch-meta">
+                            <div class="batch-meta-item">
+                                <i class="fas fa-user-graduate"></i> Coming Soon
+                            </div>
+                            <div class="batch-meta-item">
+                                <i class="fas fa-star"></i> New Batch
+                            </div>
+                        </div>
+                        
+                        <div class="batch-price">
+                            FREE <span>₹2499</span>
+                        </div>
+                        
+                        <div class="batch-actions">
+                            <a href="#" class="btn btn-primary">Notify Me</a>
+                            <a href="#" class="btn btn-secondary" disabled>Coming Soon</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Batch 03 -->
+                <div class="batch-card">
+                    <img src="D:\cs\Website\educational website\images\Batch covers\coming soon... for batches.jpg" alt="Physics Batch" class="batch-image">
+                    <div class="batch-content">
+                        <span class="batch-badge">Physics</span>
+                        <h3 class="batch-title">Physics Concept Builder</h3>
+                        <p class="batch-description">Build strong physics fundamentals with conceptual clarity and problem-solving skills.</p>
+                        
+                        <div class="batch-meta">
+                            <div class="batch-meta-item">
+                                <i class="fas fa-user-graduate"></i> Coming Soon
+                            </div>
+                            <div class="batch-meta-item">
+                                <i class="fas fa-star"></i> New Batch
+                            </div>
+                        </div>
+                        
+                        <div class="batch-price">
+                            FREE <span>₹2999</span>
+                        </div>
+                        
+                        <div class="batch-actions">
+                            <a href="#" class="btn btn-primary">Notify Me</a>
+                            <a href="#" class="btn btn-secondary" disabled>Coming Soon</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Batches -->
+    <section class="upcoming-batches">
+        <div class="container">
+            <h2 class="section-title"><span class="text-primary">Upcoming</span> Batches</h2>
+            <p class="section-subtitle">Exciting new batches coming soon to help you in your preparation</p>
+            
+            <div class="upcoming-grid">
+                <div class="upcoming-card">
+                    <div class="upcoming-icon">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <h3 class="upcoming-title">Inorganic Chemistry</h3>
+                    <p class="upcoming-description">Master the periodic table and chemical bonding with memory techniques.</p>
+                    <a href="#" class="btn btn-primary">Notify Me</a>
+                </div>
+                
+                <div class="upcoming-card">
+                    <div class="upcoming-icon">
+                        <i class="fas fa-square-root-alt"></i>
+                    </div>
+                    <h3 class="upcoming-title">Mathematics Crash Course</h3>
+                    <p class="upcoming-description">Quick revision of all important concepts and formulas.</p>
+                    <a href="#" class="btn btn-primary">Notify Me</a>
+                </div>
+                
+                <div class="upcoming-card">
+                    <div class="upcoming-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3 class="upcoming-title">Chemistry Revision</h3>
+                    <p class="upcoming-description">Complete revision of Physical, Organic and Inorganic Chemistry.</p>
+                    <a href="#" class="btn btn-primary">Notify Me</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="batch-cta">
+        <div class="container">
+            <h2 class="batch-cta-title">Ready to Join Our Batches?</h2>
+            <p class="batch-cta-subtitle">Take the first step towards academic excellence with our specialized learning programs</p>
+            <a href="#" class="btn btn-secondary">Explore All Batches</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>AasliSahil</h3>
+                    <p>Your trusted learning partner for quality education</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Batches</h3>
+                    <ul class="footer-links">
+                        <li><a href="Batches/TOF 2025/tof 2025.html">TOF 2025</a></li>
+                        <li><a href="#">Physical Chemistry</a></li>
+                        <li><a href="#">Physics Concept Builder</a></li>
+                        <li><a href="#">Upcoming Batches</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="Mock Test/Mock Tests.html">Mock Tests</a></li>
+                        <li><a href="#">DPPs</a></li>
+                        <li><a href="#">Study Materials</a></li>
+                        <li><a href="#">Previous Year Papers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 AasliSahil. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        // Category tabs functionality
+        const tabs = document.querySelectorAll('.category-tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                tabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                // Here you would add code to filter batches by category
+            });
+        });
+    </script>
+</body>
+</html>

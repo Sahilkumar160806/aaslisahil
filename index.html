@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AasliSahil - Your Learning Partner</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #6a00f4;
+            --secondary-color: #ff6b00;
+            --dark-color: #1e1e1e;
+            --light-color: #f8f9fa;
+            --gray-color: #6c757d;
+        }
+        
+        body {
+            background-color: #ffffff;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+            border: 2px solid var(--secondary-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: transparent;
+            color: var(--secondary-color);
+        }
+        
+        .text-primary {
+            color: var(--primary-color);
+        }
+        
+        .text-secondary {
+            color: var(--secondary-color);
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray-color);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 25px;
+        }
+        
+        .nav-links a {
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray-color);
+            margin-bottom: 2.5rem;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 3rem;
+        }
+        
+        .hero-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .feature-description {
+            color: var(--gray-color);
+        }
+        
+        /* Courses Section */
+        .courses {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .course-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .course-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .course-content {
+            padding: 20px;
+        }
+        
+        .course-category {
+            display: inline-block;
+            background-color: var(--light-color);
+            color: var(--primary-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .course-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .course-description {
+            color: var(--gray-color);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--gray-color);
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .testimonials-slider {
+            margin-top: 50px;
+            position: relative;
+        }
+        
+        .testimonial-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 0 15px;
+            text-align: center;
+        }
+        
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 3px solid var(--primary-color);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            color: var(--dark-color);
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .testimonial-role {
+            color: var(--gray-color);
+            font-size: 0.9rem;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #8a2be2 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #b3b3b3;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b3b3b3;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .cta-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">Aasli<span>Sahil</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="Batches.html">Batches</a></li>
+                    <li><a href="Library/Digital Library.html">Digital Library</a></li>
+                    <li><a href="Mock Test/Mock Tests.html">Mock Test & DPP</a></li>
+                    <li><a href="Contact.html">Contact</a></li>
+                </ul>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Learn from the <span class="text-primary">Best & Free</span> with AasliSahil</h1>
+                <p class="hero-subtitle">Radhey Radhey mere jigar k challo....... Welcome back.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary">Explore Courses</a>
+                    <a href="#" class="btn btn-secondary">Join Now</a>
+                </div>
+                <img src="D:\cs\Website\educational website\cover page (Feature Image)\Aaslisahil cover.jpg" alt="Students Learning" class="hero-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose <span class="text-primary">AasliSahil</span></h2>
+            <p class="section-subtitle">We provide the best learning content Free Of Cost in uneque way</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3 class="feature-title">Expert Instructors</h3>
+                    <p class="feature-description">Learn from industry experts and experienced educators who are passionate about teaching.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="feature-title">Quality Content</h3>
+                    <p class="feature-description">High-quality video lectures, study materials, and practice questions to enhance your learning.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="feature-title">Flexible Learning</h3>
+                    <p class="feature-description">Learn at your own pace, anytime, anywhere with our online platform and mobile app.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3 class="feature-title">Practice Tests</h3>
+                    <p class="feature-description">Regular tests and quizzes to assess your progress and identify areas for improvement.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3 class="feature-title">Doubt Solving</h3>
+                    <p class="feature-description">Get your doubts cleared instantly with our dedicated doubt-solving sessions.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3 class="feature-title">Learn & Fun</h3>
+                    <p class="feature-description">We tech in a funny ways. Not too deciplane and rudely.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses">
+        <div class="container">
+            <h2 class="section-title">Our <span class="text-primary">Popular Courses</span></h2>
+            <p class="section-subtitle">Explore our wide range of courses designed to help you achieve your learning goals.</p>
+            
+            <div class="courses-grid">
+                <div class="course-card">
+                    <img src="D:\cs\Website\educational website\images\Batch covers\tof batch 2025 cover.jpg" alt="Chemistry" class="course-image">
+                    <div class="course-content">
+                        <span class="course-category">Chemistry</span>
+                        <a href="Batches/TOF 2025/tof 2025.html" style="text-decoration: none; color: inherit;">
+                            <h3 style="font-weight: bold;"><strong>TOF: Trick Of Fear 2025</strong></h3>
+                        </a>
+                        <p class="course-description">Organic Chemistry all reactions with tricks.</p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-star text-secondary"></i> 3.8 (120)</span>
+                            <span><i class="fas fa-user-graduate"></i> 350+</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <img src="D:\cs\Website\educational website\images\Batch covers\coming soon... for batches.jpg" alt="Chemistry" class="course-image">
+                    <div class="course-content">
+                        <span class="course-category">Chemistry</span>
+                        <h3 class="course-title">Batch 02</h3>
+                        <p class="course-description">Free Of Cost.</p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-star text-secondary"></i> 3.7 (95)</span>
+                            <span><i class="fas fa-user-graduate"></i> 450+</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <img src="D:\cs\Website\educational website\images\Batch covers\coming soon... for batches.jpg" alt="Physics" class="course-image">
+                    <div class="course-content">
+                        <span class="course-category">Physics</span>
+                        <h3 class="course-title">Batch 03</h3>
+                        <p class="course-description">free batch for teach chemistry.</p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-star text-secondary"></i> 3.9 (150)</span>
+                            <span><i class="fas fa-user-graduate"></i> 300+</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <img src="D:\cs\Website\educational website\images\Batch covers\coming soon... for batches.jpg" alt="Math" class="course-image">
+                    <div class="course-content">
+                        <span class="course-category">Math</span>
+                        <h3 class="course-title">Batch 04</h3>
+                        <p class="course-description">free batch for teach chemistry.</p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-star text-secondary"></i> 3.6 (80)</span>
+                            <span><i class="fas fa-user-graduate"></i> 400+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="#" class="btn btn-primary">View All Courses</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our <span class="text-primary">Students Say</span></h2>
+            <p class="section-subtitle">Hear from our successful students who transformed their careers with AasliSahil.</p>
+            
+            <div class="testimonials-slider">
+                <div class="testimonial-card">
+                    <img src="D:\cs\Website\educational website\images\icons\User DP.png" alt="Student" class="testimonial-avatar">
+                    <p class="testimonial-text">"AasliSahil's courses helped me to learn Hard and difficulte topics in funny and easy way</p>
+                    <h4 class="testimonial-author">Priya Sharma</h4>
+                    <p class="testimonial-role">12th student on YT</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <img src="D:\cs\Website\educational website\images\icons\User DP.png" alt="Student" class="testimonial-avatar">
+                    <p class="testimonial-text">"Thanks To Sahil Bro for TOF Batch because of this i leared reactions with entertanment"</p>
+                    <h4 class="testimonial-author">Rahul Verma</h4>
+                    <p class="testimonial-role">Student of 12th</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <img src="D:\cs\Website\educational website\images\icons\User DP.png" alt="Student" class="testimonial-avatar">
+                    <p class="testimonial-text">"Thanks For Free Batches, i have not Fee"</p>
+                    <h4 class="testimonial-author">Neha Patel</h4>
+                    <p class="testimonial-role">Student</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="cta-title">Ready to Transform Your Career?</h2>
+            <p class="cta-subtitle">Join thousands of students who have already taken the first step towards their dream careers with AasliSahil.</p>
+            <div class="hero-buttons">
+                <a href="Mock Test/Mock Tests.html" class="btn btn-primary">Mock Tests</a>
+                <a href="#" class="btn btn-secondary">DPPs</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>AasliSahil</h3>
+                    <p>Your trusted learning partner for quality education</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Courses</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Chemistry</a></li>
+                        <li><a href="#">Physics</a></li>
+                        <li><a href="#">Math</a></li>
+                        <li><a href="#">Science</a></li>
+                        <li><a href="#">10th class</a></li>
+                        <li><a href="#">View All Courses</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="Mock Test/Mock Tests.html">Mock Tests</a></li>
+                        <li><a href="#">DPPs</a></li>
+                        <li><a href="#">Study Materials</a></li>
+                        <li><a href="#">Previous Year Papers</a></li>
+                        <li><a href="#">Important Questions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025AasliSahil. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        // You can add more JavaScript here for testimonials slider, etc.
+        // For a complete implementation, consider using a library like Swiper.js
+    </script>
+</body>
+</html>
